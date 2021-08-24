@@ -1,0 +1,96 @@
+
+
+#Firewall is security program, which is secure from outside network 
+it is controlling inbound and outbound and monitoring 
+#there are two type firewall - Hardware / Software.
+
+Netfiltering - it allow the kernel module to inspect every packate 
+
+There are nine zone
+Predefined zone
+1. Ttrusted - Allow all incoming traffic
+2. Home - reject incoming traffic unless related to outgoing traffic
+3.internel - same as home zones
+4.work - reject infomming traffic unless related to outgoing traffic 
+5. public zone - ssh dhcp default
+6.externel - it is working ssh
+7.DMZ - Reject incoming traffic 
+8.block - reject incomming outgoing traffic
+9. Drop - drop all incomming trafic
+
+Pre-define services
+ssh dhcp ipp-client samba-client mdns.
+
+configuration file
+/etc/firewalld/firewall.conf
+systemctl status firewalld
+
+service:
+systemctl status firewalld
+systemctl enable firewalld
+firewall-cmd state
+#firewall-cmd --get-default-zone -- check default zone
+# firewall-cmd --list-all  -- to check zone services
+firewall-cmd --list-all-zones --> to check all zones
+#firewall-cmd --get-zones -- to check active zone in the system
+to check the services of all zones
+firewall-cmd --zone=home --list-all
+firewall-cmd --get-services --> to check available services
+#firewall-cmd --set-default-zone=home  -- set new zone
+/usr/lib/firewalld/services
+note - one interface can be a part of one zone.
+to add service temp
+firewall-cmd --add-service=http
+firewall-cmd --remove-service=http
+add service permanent
+firewall-cmd --add-service=http --permanent
+firewall-cmd --reload
+
+how to add port in firewalld
+#firewall-cmd --zone=public --add-port=25/tcp --permanents
+#firewall-cmd --list-ports - to check the added ports.
+
+#firewall-cmd --reload - restart the service 
+
+#firewall-cmd --list-all-zones -- all zone inforation
+
+
+
+#firewall-cmd --get-active-zones --zonename and interface name will be displayed.
+
+firewall-cmd --remove-rich-rule='rule family="ipv4" source address="192.168.0.12" drop' --permanent
+
+add service - /usr/lib/firewalld/services -
+to modify the service
+copy pest - cp myapp.xml /etc/firewalld/services/
+firewall-cmd --reload
+firewall-cmd --get-services |grep myapp
+firewall-cmd --add-service=myapp
+
+firewall-cmd --query-panic
+firewall-cmd --panic-on
+firewall-cmd --panic-off
+
+
+timedatectl 
+data -s "13 MAY 2021 12:30:00"
+hwclock -r
+vi /etc/chrony.conf
+ chronyc sources
+
+date
+hwclock --hctosys
+
+server should be on internet
+
+
+
+
+
+
+
+
+
+  
+
+
